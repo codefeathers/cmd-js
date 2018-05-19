@@ -2,7 +2,7 @@
 
 A very simple and strict argv parser for nodejs cli applications.
 
-> Note: This may not suit your application. CMDjs is _very minimal_ and was written for use in my other apps [@codefeathers](https://github.com/codefeathers) and elsewhere. It was mostly done as an experiment of "how difficult could it be". If you feel like the minimal interface of CMDjs is for you, then go full steam ahead!
+> Note: This may not suit your application. CMDjs is _very minimal_ and was written for use in my other apps at [@codefeathers](https://github.com/codefeathers) and elsewhere. It was mostly an experiment of "how difficult could it be". If you feel like the minimal interface of CMDjs is for you, then go full steam ahead!
 
 ## Usage
 
@@ -28,9 +28,16 @@ cmd
 	.default(_ => log('Command not found.\nUse --help for help'));
 ```
 
-Save this as any file name: `sg-cli` would do here (`.js` extension is optional). Make this file executable by doing `chmod a+x s-g`. And then you can do this:
+Save this with any file name. For example, `sg-cli` (`.js` extension is optional).
+
+Make this file executable by doing `chmod a+x s-g`. And then you can do this:
 
 ```shell
+[mkr@codefeathers]$ ./sg-cli -h
+Usage:
+ list
+   list all future gadget laboratory members
+
 [mkr@codefeathers]$ ./sg-cli list
 Okabe Rintaro
 Shiina Mayuri
@@ -47,7 +54,7 @@ Two arguments are passed to the callback when a command matches. An array of the
 cmd.use('new', (rest, cur) => ...);
 ```
 
-Because of this, you can use the rest array to create a new `CMDjs` instance in the callback. You could also choose to split this function separately and pass its reference.
+Because of this, you can use the rest array to create a new `CMDjs` instance in the callback. You could also choose to split this function out and pass its reference.
 
 ## Drawbacks
 
