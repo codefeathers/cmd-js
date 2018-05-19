@@ -1,0 +1,26 @@
+{
+  "name": "cmd-js",
+  "version": "0.1.0",
+  "description": "Super simple argv parser for nodejs.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codefeathers/cmd-js.git"
+  },
+  "keywords": [
+    "cli",
+    "interface",
+    "argv",
+    "parser"
+  ],
+  "author": "Muthu Kumar <@MKRhere> (https://mkr.pw)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codefeathers/cmd-js/issues"
+  },
+  "homepage": "https://github.com/codefeathers/cmd-js#readme",
+  "dependencies": {}
+}
