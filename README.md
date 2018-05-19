@@ -48,7 +48,7 @@ You can add your file to `PATH` and also invoke `sg-cli` directly without specif
 
 ## Continuation pattern
 
-Two arguments are passed to the callback when a command matches. An array of the remaining cli args, and the currently matched arg.
+Two arguments are passed to the callback when a command matches: an array of the remaining cli args, and the currently matched arg.
 
 ```JavaScript
 cmd.use('new', (rest, cur) => ...);
