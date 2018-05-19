@@ -1,6 +1,6 @@
 {
-  "name": "cmd-js",
-  "version": "0.1.0",
+  "name": "@codefeathers/cmd-js",
+  "version": "0.2.0",
   "description": "Super simple argv parser for nodejs.",
   "main": "index.js",
   "scripts": {
