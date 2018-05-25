@@ -4,14 +4,10 @@ const CMDjs = require('.');
 const { log } = console;
 
 const cmd = new CMDjs(
-	CMDjs.source(process.argv), // slices the actual args we need
-	{ forceExit: true } // Makes program exit after executing matched function
-);
+	{ '--help': _ => log('Help!') }
+)
 
-const members = [ 'Okabe Rintaro', 'Shiina Mayuri', 'Hashida Itaru' ];
-
-cmd
-	.use(['-h', '--help'], _ => log('Usage:\n list\n  list all future gadget laboratory members'))
-	.use(['ls', 'list'], _ => log(members.join('\n')))
-	.use('password', _ => log('El psy kongroo.'))
-	.default(_ => log('Command not found.\nUse --help for help'));
+cmd.use({ '--ok': _ => log('ok') })
+cmd.use('/home/mkr/Code/mkr/CMDjs/plugins')
+log(cmd);
+log(cmd.start(process));

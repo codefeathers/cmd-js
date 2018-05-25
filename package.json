@@ -1,7 +1,7 @@
 {
   "name": "@codefeathers/cmd-js",
-  "version": "0.2.0",
-  "description": "Super simple argv parser for nodejs.",
+  "version": "0.5.0",
+  "description": "Super simple cli framework for nodejs.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "cli",
+    "framework",
     "interface",
     "argv",
     "parser"
@@ -22,5 +23,9 @@
     "url": "https://github.com/codefeathers/cmd-js/issues"
   },
   "homepage": "https://github.com/codefeathers/cmd-js#readme",
-  "dependencies": {}
+  "dependencies": {
+    "@codefeathers/fuse": "^0.11.1",
+    "minimist": "^1.2.0",
+    "require-all": "^2.2.0"
+  }
 }
