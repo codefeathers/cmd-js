@@ -1,0 +1,17 @@
+#!/usr/bin/node
+
+const CMDjs = require('.');
+const { log } = console;
+
+const members = [ 'Okabe Rintaro', 'Shiina Mayuri', 'Hashida Itaru', 'Makise Kurisu' ];
+
+const cmd = new CMDjs({
+	'-h, --help': options => log('Usage:\n list\n  list all future gadget laboratory members'),
+	'ls, list': options => log(members.join('\n')),
+	'default': log('Use --help to get help text'),
+});
+
+cmd.use({ 'password': _ => log('El psy kongroo.') }); // Add more commands!
+cmd.use('/home/mkr/.plugins'); // Add paths!
+
+cmd.start(process);

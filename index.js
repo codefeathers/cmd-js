@@ -1,6 +1,5 @@
 const fs = require('fs');
 
-const Promise = require('bluebird');
 const Fuse = require('@codefeathers/fuse');
 const argvParser = require('minimist');
 const requireAll = require('require-all');
@@ -20,7 +19,6 @@ const Errors = [
 
 const fileOrDir = path => {
 	let stat = tryCatch(fs.lstatSync, path);
-	if(stat[0] === 'Failed') stat = tryCatch(fs.lstatSync, path + '.js');
 	if(stat[0] === 'Failed') return Errors[0];
 	if(stat.isFile()) return 'file';
 	if(stat.isDirectory()) return 'dir';
@@ -48,7 +46,7 @@ class CMDjs {
 			.is('file', _ => this.use(require(action)))
 			.is('dir', _ => {
 				const all = requireAll({ dirname: action, recursive: false });
-				Object.keys(all).forEach(item => this.use(action + '/' + item)); })
+				Object.keys(all).forEach(item => this.use(action + '/' + item + '.js')); })
 			.resolve();
 		return this;
 	}
@@ -56,7 +54,7 @@ class CMDjs {
 	start(proc) {
 		const args = proc.argv.slice(2);
 		this.args = argvParser(args);
-		return this.args;
+		
 	}
 }
 
