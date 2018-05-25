@@ -30,7 +30,7 @@ cmd.start(process);
 
 Save this with any file name. For example, `sg-cli` (`.js` extension is optional).
 
-Make this file executable by doing `chmod a+x s-g`. And then you can do this:
+Make this file executable by doing `chmod a+x sg-cli`. And then you can do this:
 
 ```shell
 [mkr@codefeathers]$ ./sg-cli -h
@@ -42,6 +42,7 @@ Usage:
 Okabe Rintaro
 Shiina Mayuri
 Hashida Itaru
+Makise Kurisu
 ```
 
 You can add your file to `PATH` and also invoke `sg-cli` directly without specifying path.
