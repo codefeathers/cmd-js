@@ -1,6 +1,6 @@
 {
   "name": "@codefeathers/cmd-js",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Super simple cli framework for nodejs.",
   "main": "es6/index.js",
   "scripts": {
