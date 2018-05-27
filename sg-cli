@@ -1,0 +1,31 @@
+#!/usr/bin/node
+
+const CMDjs = require('./es6');
+const { log } = console;
+
+const characters = {
+	good: [ 'Okabe Rintaro', 'Shiina Mayuri', 'Hashida Itaru', 'Makise Kurisu' ],
+	evil: [ 'Kiryu Moeka', 'Yugo Tennouji' ]
+}
+
+const cmd = new CMDjs({
+	'-h, --help': _ => log(
+					'Usage:\n list\n  List of Steins;Gate characters'
+					+ '\n   -a, --all All characters'
+					+ '\n   -g --good Good guys'
+					+ '\n   -e --evil Bad guys'),
+	'ls, list': {
+		'-a, --all': _ => log([ ...characters.good, ...characters.evil ].join('\n')),
+		'-g, --good': _ => log(characters.good.join('\n')),
+		'-e, --evil, -b, --bad': _ => log(characters.evil.join('\n')),
+		'default': _ => log(
+					'  -a, --all All characters'
+					+ '\n  -g --good Good guys'
+					+ '\n  -e --evil Bad guys')
+	},
+	'default': _ => log('Use --help to get help text'),
+});
+
+cmd.use({ 'password': _ => log('El psy kongroo.') }); // Add more commands!
+
+cmd.start(process);

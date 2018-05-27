@@ -1,12 +1,14 @@
 # CMDjs
 
-A very simple and strict argv parser for nodejs cli applications.
+Yet another CLI framework.
 
-> Note: This may not suit your application. CMDjs is _very minimal_ and was written for use in my other apps at [@codefeathers](https://github.com/codefeathers) and elsewhere. It was mostly an experiment of "how difficult could it be". If you feel like the minimal interface of CMDjs is for you, then go full steam ahead!
+> Note: CMDjs is _very minimal_ and was written for use in my other apps at [@codefeathers](https://github.com/codefeathers) and elsewhere. It was mostly an experiment of "how difficult could it be", and I'm happy to see how it turned out. If you feel like the minimal, friendly interface of CMDjs is for you, then go full steam ahead!
 
 ## Usage
 
-This module is best explained with an example. (This is also available in this repo: [test](./test))
+CMDjs accepts a logic tree of commands and functions and executes the function that matches your user's command.
+
+This module is best explained with an example. (A slightly more elaborate example is available in this repo: [sample](./sg-cli)).
 
 ```JavaScript
 #!/usr/bin/node
@@ -14,23 +16,23 @@ This module is best explained with an example. (This is also available in this r
 const CMDjs = require('@codefeathers/cmd-js');
 const { log } = console;
 
-const cmd = new CMDjs(
-	CMDjs.source(process.argv), // slices the actual args we need
-	{ forceExit: true } // Makes program exit after executing matched function
-);
+const members = [ 'Okabe Rintaro', 'Shiina Mayuri', 'Hashida Itaru', 'Makise Kurisu' ];
 
-const members = [ 'Okabe Rintaro', 'Shiina Mayuri', 'Hashida Itaru' ];
+const cmd = new CMDjs({
+	'-h, --help': _ => log('Usage:\n list\n  list all future gadget laboratory members'),
+	'ls, list': _ => log(members.join('\n')),
+	'default': _ => log('Use --help to get help text'),
+});
 
-cmd
-	.use(['-h', '--help'], _ => log('Usage:\n list\n  list all future gadget laboratory members'))
-	.use(['ls', 'list'], _ => log(members.join('\n')))
-	.use('password', _ => log('El psy kongroo.'))
-	.default(_ => log('Command not found.\nUse --help for help'));
+cmd.use({ 'password': _ => log('El psy kongroo.') }); // Add more commands!
+cmd.use('/home/mkr/.plugins'); // Add paths!
+
+cmd.start(process);
 ```
 
-Save this with any file name. For example, `sg-cli` (`.js` extension is optional).
+Save this with any file name, for example, `sg-cli` (extensions for executables are optional in Linux).
 
-Make this file executable by doing `chmod a+x s-g`. And then you can do this:
+Make this file executable by doing `chmod a+x sg-cli`. And then you can do this:
 
 ```shell
 [mkr@codefeathers]$ ./sg-cli -h
@@ -42,20 +44,27 @@ Usage:
 Okabe Rintaro
 Shiina Mayuri
 Hashida Itaru
+Makise Kurisu
 ```
 
 You can add your file to `PATH` and also invoke `sg-cli` directly without specifying path.
 
-## Continuation pattern
+## Nesting
 
-Two arguments are passed to the callback when a command matches: an array of the remaining cli args, and the currently matched arg.
+Because args are parsed by minimist and passed as an object to callbacks, effectively you can nest and branch with plain JavaScript.
+
+Additionally, CMDjs allows you to do this:
 
 ```JavaScript
-cmd.use('new', (rest, cur) => ...);
+'ls, list': {
+	'-a, --all': // [Function],
+	'-g, --good': // [Function],
+	'-e, --evil': // [Function]
+}
 ```
 
-Because of this, you can use the rest array to create a new `CMDjs` instance in the callback. You could also choose to split this function out and pass its reference.
+You can nest indefinitely in this pattern. If you need more flexibility, take things in your own hands and use the minimist object at any point in the tree!
 
-## Drawbacks
+## Issues and PRs
 
-CMDjs does not do smart magic like say, [tj/commander](https://github.com/tj/commander). It does one thing and returns. It doesn't care if what you matched was an option or a command. It's up to you to handle it. Is this a good thing or a bad thing? It's up to you. Works for me.
+Issues and PRs are most welcome. If there are uncaught bugs, please report! Keep in mind that CMDjs is designed to be backwards-compatible henceforth. Any changes should not break previous versions.
