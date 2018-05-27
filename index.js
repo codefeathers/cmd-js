@@ -94,9 +94,9 @@ class CMDjs {
 
 		const keys = Object.keys(this.hash);
 		const res = recurse(this.hash, keys, argString);
-		if (res && res.unmatched && this.hash.default) {
-			if(res.hash) res.hash.default(argmin);
-			else this.hash.default(argmin);
+		if (res && res.unmatched && this.hash['@default']) {
+			if(res.hash) res.hash['@default'](argmin);
+			else this.hash['@default'](argmin);
 			return { status: 'default' };
 		}
 		return { status: 'ok' };

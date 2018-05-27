@@ -21,7 +21,7 @@ const members = [ 'Okabe Rintaro', 'Shiina Mayuri', 'Hashida Itaru', 'Makise Kur
 const cmd = new CMDjs({
 	'-h, --help': _ => log('Usage:\n list\n  list all future gadget laboratory members'),
 	'ls, list': _ => log(members.join('\n')),
-	'default': _ => log('Use --help to get help text'),
+	'@default': _ => log('Use --help to get help text'),
 });
 
 cmd.use({ 'password': _ => log('El psy kongroo.') }); // Add more commands!
